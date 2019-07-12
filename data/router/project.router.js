@@ -12,9 +12,8 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', validateProjectId, async (req, res) => {
-  const { id } = req.params;
   try {
-    const project = await projectsDB.get(id);
+    const project = await projectsDB.get(req.params.id);
     res.status(200).json(project);
   } catch (error) {
     res.status(500).json({ error: "Couldn't retreive the project" });
@@ -36,6 +35,19 @@ router.put('/:id', validateProject, validateProjectId, async (req, res) => {
     res.status(200).json(project);
   } catch (error) {
     res.status(500).json({ error: "Couldn't update the project" });
+  }
+});
+
+router.delete('/:id', validateProjectId, async (req, res) => {
+  try {
+    const project = await projectsDB.remove(req.params.id);
+    if (project) {
+      res.status(200).json({ message: 'Project deleted successfully' });
+    } else {
+      res.status(500).json({ error: 'Project not deleted' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Couldn't delete the project" });
   }
 });
 
