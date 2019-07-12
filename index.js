@@ -1,3 +1,14 @@
+const express = require('express');
+
+const server = express();
+// eslint-disable-next-line no-undef
+const PORT = process.env.PORT || 4000;
+server.use(express.json());
+
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
 
