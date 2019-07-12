@@ -26,13 +26,22 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+  > Server-side routing and Express middleware
+
 - [ ] Describe Middleware?
+
+  > A middleware sits between a request to the server and the response to the client. It processes the request and decides on the best action to take based on the request. An example is a middleware that checks if an id exist in the database before making a change to the data, if it does, the middleware let's the request proceed but if not will return an error to the client
 
 - [ ] Describe a Resource?
 
+  > A resource is an object with a type, associated data, relationships to other resources, and a set of methods that operate on it.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+  > It should return a status code of the range 200>= code <300
+
 - [ ] How can we partition our application into sub-applications?
+  > We can do so be splitting up into different routes
 
 ## Project Setup
 
