@@ -1,3 +1,22 @@
+const express = require('express');
+const projectRouter = require('./data/router/project.router');
+const actionRouter = require('./data/router/action.router');
+
+const server = express();
+// eslint-disable-next-line no-undef
+const PORT = process.env.PORT || 4000;
+server.use(express.json());
+server.use('/api/projects', projectRouter);
+server.use('/api/actions', actionRouter);
+
+server.get('/', (req, res) => {
+  res.status(200).json('Server running at /api/projects');
+});
+
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
 
