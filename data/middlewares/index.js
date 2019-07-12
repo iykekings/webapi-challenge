@@ -28,8 +28,8 @@ const validateActionId = async (req, res, next) => {
   const { id } = req.params;
   if (validateId(id)) {
     try {
-      const project = await actionDB.get(id);
-      console.log(project);
+      const action = await actionDB.get(id);
+      console.log(action);
       next();
     } catch (error) {
       res.status(500).json({ error: 'There was an error validating the id' });
