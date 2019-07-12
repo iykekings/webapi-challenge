@@ -1,10 +1,6 @@
 const router = require('express').Router();
 const actionsDB = require('../helpers/actionModel');
-const {
-  validateProjectId,
-  validateAction,
-  validateActionId
-} = require('../middlewares/index');
+const { validateAction, validateActionId } = require('../middlewares/index');
 
 router.get('/', async (req, res) => {
   try {
@@ -23,6 +19,15 @@ router.get('/:id', validateActionId, async (req, res) => {
     res
       .status(500)
       .json({ error: "Couldn't retrieve actions for that project Id" });
+  }
+});
+
+router.post('/', validateAction, async (req, res) => {
+  try {
+    const project = await actionsDB.insert(req.body);
+    res.status(201).json(project);
+  } catch (error) {
+    res.status(500).json({ error: "Couldn't add the project" });
   }
 });
 module.exports = router;
