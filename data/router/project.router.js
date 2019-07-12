@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const projectsDB = require('../helpers/projectModel');
-const { validateProjectId } = require('../middlewares/index');
+const { validateProjectId, validateProject } = require('../middlewares/index');
 
 router.get('/', async (req, res) => {
   try {
@@ -18,6 +18,15 @@ router.get('/:id', validateProjectId, async (req, res) => {
     res.status(200).json(project);
   } catch (error) {
     res.status(500).json({ error: "Couldn't retreive the project" });
+  }
+});
+
+router.post('/', validateProject, async (req, res) => {
+  try {
+    const project = await projectsDB.insert(req.body);
+    res.status(201).json(project);
+  } catch (error) {
+    res.status(500).json({ error: "Couldn't add the project" });
   }
 });
 
