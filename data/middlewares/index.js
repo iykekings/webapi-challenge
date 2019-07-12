@@ -44,7 +44,33 @@ const validateActionId = async (req, res, next) => {
     res.status(400).json({ message: 'The id is invalid' });
   }
 };
+
+const validateProject = async (req, res, next) => {
+  const { name, description } = req.body;
+  if (name && description) {
+    next();
+  } else {
+    res.status(400).json({
+      message:
+        'Please provide the name, description and completed for the project'
+    });
+  }
+};
+const validateAction = async (req, res, next) => {
+  const { project_id, description, notes } = req.body;
+  if (validateId(project_id) && description && notes) {
+    next();
+  } else {
+    res.status(400).json({
+      message:
+        'Please provide the project_id, description and notes for the action'
+    });
+  }
+};
+
 module.exports = {
   validateActionId,
-  validateProjectId
+  validateProjectId,
+  validateAction,
+  validateProject
 };
