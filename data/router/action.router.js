@@ -14,4 +14,15 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: "Couldn't retrieve actions" });
   }
 });
+
+router.get('/:id', validateActionId, async (req, res) => {
+  try {
+    const actions = await actionsDB.get(req.params.id);
+    res.status(200).json(actions);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Couldn't retrieve actions for that project Id" });
+  }
+});
 module.exports = router;
