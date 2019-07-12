@@ -30,4 +30,13 @@ router.post('/', validateProject, async (req, res) => {
   }
 });
 
+router.put('/:id', validateProject, validateProjectId, async (req, res) => {
+  try {
+    const project = await projectsDB.update(req.params.id, req.body);
+    res.status(200).json(project);
+  } catch (error) {
+    res.status(500).json({ error: "Couldn't update the project" });
+  }
+});
+
 module.exports = router;
